@@ -11,13 +11,13 @@ const ranges = player.querySelectorAll('.player__slider');
 //build out the f(X)s
 
 function togglePlay() {
- /*if (video.paused) {
+  /*if (video.paused) {
    video.play();
  }else{
    video.pause();
  }*/
-const method = video.paused ? 'play' : 'pause';
-video[method]();
+  const method = video.paused ? 'play' : 'pause';
+  video[method]();
 }
 
 function updateButton() {
@@ -25,7 +25,7 @@ function updateButton() {
   toggle.textContent = icon;
 }
 function skip() {
-video.currentTime +=  parseFloat(this.dataset.skip);
+  video.currentTime += parseFloat(this.dataset.skip);
 }
 
 function handleRangeUpdate() {
@@ -42,21 +42,20 @@ function scrub(e) {
   video.currentTime = scrubTime;
 }
 
-
 // hook up the event
 
 video.addEventListener('click', togglePlay);
-video.addEventListener('play',  updateButton);
-video.addEventListener('pause',  updateButton);
-toggle.addEventListener('click',  togglePlay);
+video.addEventListener('play', updateButton);
+video.addEventListener('pause', updateButton);
+toggle.addEventListener('click', togglePlay);
 video.addEventListener('timeupdate', handleProgress);
 
-skipButtons.forEach(button =>button.addEventListener('click',skip));
+skipButtons.forEach(button => button.addEventListener('click', skip));
 ranges.forEach(range => range.addEventListener('change', handleRangeUpdate));
 ranges.forEach(range => range.addEventListener('mousemove', handleRangeUpdate));
 
 let mousedown = false;
 progress.addEventListener('click', scrub);
-progress.addEventListener('mousemove', (e) => mousedown && scrub(e));
-progress.addEventListener('mousedown', () => mousedown = true);
-progress.addEventListener('mouseup', () => mousedown = false);
+progress.addEventListener('mousemove', e => mousedown && scrub(e));
+progress.addEventListener('mousedown', () => (mousedown = true));
+progress.addEventListener('mouseup', () => (mousedown = false));
